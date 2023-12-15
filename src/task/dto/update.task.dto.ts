@@ -13,20 +13,4 @@ export class UpdateTaskDto{
     @IsString()
     @IsNotEmpty()
     state: string;
-
-    @IsString()
-    @IsNotEmpty()
-    initial_date: string;
-
-    @IsString()
-    @IsNotEmpty()
-    final_date: string;
-
-    @IsNumber()
-    @IsNotEmpty()
-    id_team: number;
-
-    @IsEmail()
-    @IsNotEmpty()
-    email: string;
 }
