@@ -45,4 +45,9 @@ export class CommentService {
         }
         await this.commentRepository.remove(comment);
     }
+
+    async findCommentsByIdTask(id_task: number): Promise<Comment[]> {
+        const comments = await this.commentRepository.find({where: {id_task}})
+        return comments;
+    }
 }
