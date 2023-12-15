@@ -54,4 +54,11 @@ export class TaskService {
         return {ids, names};
     } 
 
+    async findTasksByIdTeam(id: number): Promise<{ ids: number[]; names: string[] }> {
+        const tasks = await this.taskRepository.find({where: {id}})
+        const ids = tasks.map((task) => task.id);
+        const names = tasks.map((task) => task.name);
+        return {ids, names};
+    }
+
 }

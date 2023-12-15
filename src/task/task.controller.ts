@@ -48,4 +48,11 @@ export class TaskController {
   async findTaskByEmail(@Body() data: {email:string}){
     return await this.taskService.findTasksByEmail(data);
   }
+
+  @Get('task-idTeam/:data')
+    async findTaskByIdTeam(@Param('id_team') id_team: string){
+      const id = parseInt(id_team,10);
+      return await this.taskService.findTasksByIdTeam(id);
+    }
 }
+
