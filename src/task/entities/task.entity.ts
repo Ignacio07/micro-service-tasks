@@ -25,4 +25,5 @@ export class Task {
 
   @Column()
   email: string;
+
 }
