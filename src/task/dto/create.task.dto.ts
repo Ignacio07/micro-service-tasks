@@ -26,4 +26,8 @@ export class CreateTaskDto{
     @IsNumber()
     @IsNotEmpty()
     id_team: number;
+
+    @IsEmail()
+    @IsNotEmpty()
+    email: string;
 }

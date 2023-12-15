@@ -43,4 +43,9 @@ export class TaskController {
     await this.taskService.remove(id);
     return 'Task deleted';
   }
+
+  @Get('tasks-email/:data')
+  async findTaskByEmail(@Body() data: {email:string}){
+    return await this.taskService.findTasksByEmail(data);
+  }
 }

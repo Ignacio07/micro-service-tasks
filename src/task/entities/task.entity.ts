@@ -22,4 +22,7 @@ export class Task {
 
   @Column()
   id_team: number;
+
+  @Column()
+  email: string;
 }

@@ -46,4 +46,12 @@ export class TaskService {
         await this.taskRepository.remove(task);
     }
 
+    async findTasksByEmail(data: {email: string}): Promise<{ ids: number[]; names: string[] }> {
+        const email = data.email;
+        const tasks = await this.taskRepository.find({where : {email}});
+        const ids = tasks.map((task) => task.id);
+        const names = tasks.map((task) => task.name);
+        return {ids, names};
+    } 
+
 }
