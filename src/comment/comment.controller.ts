@@ -44,9 +44,8 @@ export class CommentController {
     return 'Comment deleted';
   }
 
-  @Get('comment-idTeam/:data')
-    async findCommentByIdTeam(@Param('id_team') id_team: string){
-      const id = parseInt(id_team,10);
-      return await this.commentService.findCommentsByIdTask(id);
+  @Get('comment-idTask/:id_task')
+    async findCommentByIdTeam(@Param('id_task') id_task: number){
+      return await this.commentService.findCommentsByIdTask(id_task);
   }
 }
