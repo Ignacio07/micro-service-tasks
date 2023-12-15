@@ -54,5 +54,10 @@ export class TaskController {
       const id = parseInt(id_team,10);
       return await this.taskService.findTasksByIdTeam(id);
     }
+
+  @Delete('delete-task/:id')
+    async deleteTaskAndComments(@Param('id') id: number){
+      return await this.taskService.deleteTaskAndComments(id);
+    }
 }
 

@@ -8,12 +8,14 @@ import { Repository } from 'typeorm';
 import { Task } from './entities/task.entity';
 import { CreateTaskDto } from './dto/create.task.dto';
 import { UpdateTaskDto } from './dto/update.task.dto';
+import { CommentService } from 'src/comment/comment.service';
 
 @Injectable()
 export class TaskService {
     constructor(
         @InjectRepository(Task)
         private taskRepository: Repository<Task>,
+        private readonly commentService: CommentService,
     ){}
 
     async create(createTaskDto: CreateTaskDto): Promise<Task> {
@@ -55,6 +57,17 @@ export class TaskService {
     async findTasksByIdTeam(id_team: number): Promise<Task[]> {
         const tasks = await this.taskRepository.find({where: {id_team}})
         return tasks;
+    }
+
+    async deleteTaskAndComments(id: number): Promise<string>{
+        const existingTask = await this.taskRepository.findOne({ where: { id } });
+        console.log(id, existingTask);
+        if (!existingTask) {
+          throw new Error('La tarea no existe');
+        }
+        await this.commentService.deleteCommentsByIdTask(id);
+        await this.taskRepository.remove(existingTask);
+        return 'Tarea Eliminada'
     }
 
 }

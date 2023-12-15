@@ -53,4 +53,14 @@ export class CommentService {
         const commentsComments = comments.map((comment) => comment.comment);
         return {commentsIds, commentsAuthors, commentsComments};
     }
+
+    async deleteCommentsByIdTask(id_task: number): Promise<string>{
+        try {
+            const commentsToDelete = await this.commentRepository.find({ where : {id_task} });
+            await Promise.all(commentsToDelete.map(comment => this.commentRepository.delete(comment)));
+          } catch (error) {
+            throw new Error(`Error al eliminar miembros del equipo: ${error.message}`);
+          }
+        return 'Comentarios Eliminados';
+    }
 }
