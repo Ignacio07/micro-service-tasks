@@ -59,7 +59,7 @@ export class CommentService {
             const commentsToDelete = await this.commentRepository.find({ where : {id_task} });
             await Promise.all(commentsToDelete.map(comment => this.commentRepository.delete(comment)));
           } catch (error) {
-            throw new Error(`Error al eliminar miembros del equipo: ${error.message}`);
+            throw new Error(`Error al eliminar miembros del equipo: ${error}`);
           }
         return 'Comentarios Eliminados';
     }
