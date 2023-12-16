@@ -60,14 +60,18 @@ export class TaskService {
     }
 
     async deleteTaskAndComments(id: number): Promise<string>{
-        const existingTask = await this.taskRepository.findOne({ where: { id } });
-        console.log(id, existingTask);
-        if (!existingTask) {
-          throw new Error('La tarea no existe');
+        try{    
+            const existingTask = await this.taskRepository.findOne({ where: { id } });
+            console.log(id, existingTask);
+            if (!existingTask) {
+            throw new Error('La tarea no existe');
+            }
+            await this.commentService.deleteCommentsByIdTask(id);
+            await this.taskRepository.remove(existingTask);
+            return 'Tarea Eliminada'
+        } catch (error) {
+            throw new Error('Error al eliminar tarea');
         }
-        await this.commentService.deleteCommentsByIdTask(id);
-        await this.taskRepository.remove(existingTask);
-        return 'Tarea Eliminada'
     }
 
 }
